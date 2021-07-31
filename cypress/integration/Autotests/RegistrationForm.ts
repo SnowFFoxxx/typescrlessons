@@ -35,9 +35,9 @@ describe ('Is password input work', () => {
 });
 
 describe ('Is sign in in button active', () => {
-    it('Registraion is access', () => {
-        cy.get('[type="submit"]').click();
-
-
+    it('is signUp works', () => {
+        cy.visit('/');
+        cy.signUp();
+        cy.isSignUpButtonVisible();
     });
 });
