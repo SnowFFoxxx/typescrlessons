@@ -77,7 +77,7 @@ export function getRandomNumber():number{
 }
 
 export function  setEmail(mail?:string, baseConfig:boolean = true){
-    cy.get('#email').type(mail);
+    cy.get('#email').type(mail); //Не могу понять, что именно пишет type? Я вижу только то, что mail объявлен как строка
 }
 export function  setName(pass?:string, baseConfig:boolean = true) {
     cy.get('#firstName')
@@ -115,6 +115,21 @@ export function isSignUpFormVisible() {
 
     cy.get( ('app-auth-modal app-sign-up [id="repeatPassword"]') ).should( 'be.visible' )
 }
+
+export function signUp(mail ?:string,name?:string,pass?:string,passConfirm?:string,baseConfig:boolean =true){
+        openSignUpFrom();
+        if(baseConfig){
+            setEmail(email);
+            setName(pseudonym);
+            setPassword(password);
+            setConfirmPassword(password);
+        } else{
+            setEmail(mail);
+            setName(name);
+            setPassword(pass);
+            setConfirmPassword(passConfirm);
+        }
+}
 export function openSignInForm() {
     cy.get('.header_sign-in-link > span').click()
     //cy.get('.sign-in-form ng-untouched > .primary-global-button').should('be.visible') //Здесь тоже некорректный локатор
@@ -136,21 +151,24 @@ export function isSignInFormVisible(){
 
 }
 
-export function signUp(mail ?:string,name?:string,pass?:string,passConfirm?:string,baseConfig:boolean =true){
-    openSignUpFrom();
+export function signIn(mail ?:string,pass?:string,baseConfig:boolean =true){
+    openSignInForm();
     if(baseConfig){
         setEmail(email);
-        setName(pseudonym);
         setPassword(password);
-        setConfirmPassword(password);
     } else{
         setEmail(mail);
-        setName(name);
         setPassword(pass);
-        setConfirmPassword(passConfirm);
+        //Скопипастил дичь, но не пойму, как эту дичь исправить
+        //Ведь если форма откроется, он сгенерит рандомное значение мыла и никуда не войдет
+        //А нам надо, чтобы он как-то зацепился за предыдущие сгенерированные значения
+        //Есть только мысль об объявлении новой переменной и присвоении ей значения константы
+
     }
 }
-
 Cypress.Commands.add( 'signUp', signUp )
 Cypress.Commands.add( 'isSignUpButtonVisible', isSignUpButtonVisible )
 Cypress.Commands.add( 'isSignUpFormVisible', isSignUpFormVisible )
+Cypress.Commands.add( 'signIn', signIn )
+Cypress.Commands.add( 'isSignInButtonVisible', isSignInButtonVisible )
+Cypress.Commands.add( 'isSignInFormVisible', isSignInFormVisible )
