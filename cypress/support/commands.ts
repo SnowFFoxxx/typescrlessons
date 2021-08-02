@@ -52,6 +52,17 @@ declare global {
             isSignUpFormVisible: typeof isSignUpFormVisible
             isSignUpButtonVisible: typeof isSignUpButtonVisible
             signUp: typeof signUp
+
+        }
+        type SignIn = {
+            email?:string
+            password?:string
+        }
+        interface Chainable {
+            openSignInForm: typeof openSignInForm
+            isSignInFormVisible: typeof isSignInFormVisible
+            isSignInButtonVisible: typeof isSignInButtonVisible
+            signIn: typeof signIn
         }
     }
 }
@@ -102,6 +113,15 @@ export function isSignUpFormVisible() {
 
     cy.get( ('app-auth-modal app-sign-up [id="repeatPassword"]') ).should( 'be.visible' )
 }
+export function openSignInForm() {
+    cy.get('.header_sign-in-link > span').click()
+    cy.get('.sign-in-form ng-untouched > .primary-global-button').should('be.visible')
+}
+
+export function isSignInFormVisible() {
+    cy.get( '[type="submit"]' ).should( 'be.visible' ) ;
+}
+
 
 export function signUp(mail ?:string,name?:string,pass?:string,passConfirm?:string,baseConfig:boolean =true){
     openSignUpFrom();

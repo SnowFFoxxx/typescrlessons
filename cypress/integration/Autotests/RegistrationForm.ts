@@ -1,4 +1,4 @@
-describe ('Sign in', () => {
+describe ('Sign up', () => {
     it('Is url valid', () => {
     cy.visit('https://ita-social-projects.github.io/GreenCityClient/#/');
     cy.url().should('include', 'https://ita-social-projects.github.io/GreenCityClient');
@@ -34,10 +34,16 @@ describe ('Is password input work', () => {
     });
 });
 
-describe ('Is sign in in button active', () => {
+describe ('Is sign up in button active', () => {
     it('is signUp works', () => {
         cy.visit('/');
         cy.signUp();
         cy.isSignUpButtonVisible();
     });
 });
+
+describe ('Sign in', () => {
+    it('is sign in button works', () => {
+
+    })
+})
