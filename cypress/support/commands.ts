@@ -93,11 +93,13 @@ export function setConfirmPassword(passConfirmation: string, baseConfig:boolean 
 
 export function openSignUpFrom() {
     cy.get('.header_sign-up-btn > span').click()
-    cy.get('.form-content-container > .primary-global-button').should('be.visible')
+    cy.get('.form-content-container > .primary-global-button').should('be.visible')  // некорректный локатор
+    //Если мы поменяем на type - осуществится проверка наличия кнопки SignUp
 }
 
 export function isSignUpButtonVisible() {
-     cy.get( '[type="submit"]' ).should( 'be.visible' ) ;
+     cy.get( '[type="submit"]' ).should( 'be.visible' ) ; //Но вот тут тоже идет проверка наличия кнопки
+    //Зачем оно нам дважды?
 }
 
 export function isSignUpFormVisible() {
@@ -115,13 +117,24 @@ export function isSignUpFormVisible() {
 }
 export function openSignInForm() {
     cy.get('.header_sign-in-link > span').click()
-    cy.get('.sign-in-form ng-untouched > .primary-global-button').should('be.visible')
+    //cy.get('.sign-in-form ng-untouched > .primary-global-button').should('be.visible') //Здесь тоже некорректный локатор
+    //И если мы меняем на type=submit, выполняется проверка наличия кнопки SignIn на форме
 }
 
-export function isSignInFormVisible() {
-    cy.get( '[type="submit"]' ).should( 'be.visible' ) ;
+export function isSignInButtonVisible() {
+    cy.get( '[type="submit"]' ).should( 'be.visible' ) ; //И опять мы получаем дублирующую проверку одного и того же элемента
 }
 
+export function isSignInFormVisible(){
+    cy.get( ('app-auth-modal app-sign-in h1') ).should('be.visible')
+
+    cy.get( ('app-auth-modal app-sign-in h2') ).should('be.visible')
+
+    cy.get( ('app-auth-modal app-sign-in [id="email"]') ).should('be.visible')
+
+    cy.get( ('app-auth-modal app-sign-in [id="password"]') ).should('be.visible')
+
+}
 
 export function signUp(mail ?:string,name?:string,pass?:string,passConfirm?:string,baseConfig:boolean =true){
     openSignUpFrom();
