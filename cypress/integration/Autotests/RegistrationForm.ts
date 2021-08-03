@@ -44,9 +44,11 @@ describe ('Is sign up in button active', () => {
     });
 });
 
-describe ('Sign in', () => {
-    it('is sign in button works', () => {
-
+describe ('Is Sign In form active', () => {
+    it('is sign in form works', () => {
+        cy.visit('/');
+        cy.signIn();
+        cy.isSignInFormVisible();
     })
 })
 /*
