@@ -1,3 +1,5 @@
+import {openSignInForm} from "../../support/commands";
+
 describe ('Sign up', () => {
     it('Is url valid', () => {
     cy.visit('https://ita-social-projects.github.io/GreenCityClient/#/');
@@ -44,6 +46,12 @@ describe ('Is sign up in button active', () => {
 
 describe ('Sign in', () => {
     it('is sign in button works', () => {
+
+    })
+})
+/*
+ describe ('Can we login in', () => {
+    it('Login in', () => {
 
     })
 })

@@ -69,6 +69,7 @@ declare global {
 export const email = 'greencitypavel+' +  getRandomNumber() + '@gmail.com';
 export const pseudonym = lorem.generateWords(1); //generate User name
 export const password = 'Tempm#001';
+export const email2 = 'greencitypavel@gmail.com';
 
 export function getRandomNumber():number{
     const rndInt = Math.floor(Math.random() * 60000) + 1
@@ -77,7 +78,7 @@ export function getRandomNumber():number{
 }
 
 export function  setEmail(mail?:string, baseConfig:boolean = true){
-    cy.get('#email').type(mail); //Не могу понять, что именно пишет type? Я вижу только то, что mail объявлен как строка
+    cy.get('#email').type(mail); // Не могу понять, что именно пишет type? Я вижу только то, что mail объявлен как строка
 }
 export function  setName(pass?:string, baseConfig:boolean = true) {
     cy.get('#firstName')
@@ -93,13 +94,10 @@ export function setConfirmPassword(passConfirmation: string, baseConfig:boolean 
 
 export function openSignUpFrom() {
     cy.get('.header_sign-up-btn > span').click()
-    cy.get('.form-content-container > .primary-global-button').should('be.visible')  // некорректный локатор
-    //Если мы поменяем на type - осуществится проверка наличия кнопки SignUp
 }
 
 export function isSignUpButtonVisible() {
-     cy.get( '[type="submit"]' ).should( 'be.visible' ) ; //Но вот тут тоже идет проверка наличия кнопки
-    //Зачем оно нам дважды?
+     cy.get( '[type="submit"]' ).should( 'be.visible' ) ;
 }
 
 export function isSignUpFormVisible() {
@@ -131,13 +129,12 @@ export function signUp(mail ?:string,name?:string,pass?:string,passConfirm?:stri
         }
 }
 export function openSignInForm() {
-    cy.get('.header_sign-in-link > span').click()
-    //cy.get('.sign-in-form ng-untouched > .primary-global-button').should('be.visible') //Здесь тоже некорректный локатор
-    //И если мы меняем на type=submit, выполняется проверка наличия кнопки SignIn на форме
+    cy.get('[class="header_sign-in-link tertiary-global-button"]').click() //Да, возможно локатор и говно, но иначе он не пожелал работать
+
 }
 
 export function isSignInButtonVisible() {
-    cy.get( '[type="submit"]' ).should( 'be.visible' ) ; //И опять мы получаем дублирующую проверку одного и того же элемента
+    cy.get( '[type="submit"]' ).should( 'be.visible' ) ;
 }
 
 export function isSignInFormVisible(){
@@ -154,7 +151,7 @@ export function isSignInFormVisible(){
 export function signIn(mail ?:string,pass?:string,baseConfig:boolean =true){
     openSignInForm();
     if(baseConfig){
-        setEmail(email);
+        setEmail(email2);
         setPassword(password);
     } else{
         setEmail(mail);
@@ -172,3 +169,4 @@ Cypress.Commands.add( 'isSignUpFormVisible', isSignUpFormVisible )
 Cypress.Commands.add( 'signIn', signIn )
 Cypress.Commands.add( 'isSignInButtonVisible', isSignInButtonVisible )
 Cypress.Commands.add( 'isSignInFormVisible', isSignInFormVisible )
+
